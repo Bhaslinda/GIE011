@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISLAMIC EDUCATION (GIE011) - UJIAN 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background-color: white !important; color: black !important; }
+            .page-break { page-break-before: always; }
+        }
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .omr-bubble {
+            width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #374151;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: bold; position: relative; background-color: #fff;
+        }
+        .omr-bubble.filled { background-color: #111827 !important; color: #ffffff !important; }
+        .omr-mark { position: absolute; font-size: 16px; font-weight: 900; line-height: 1; top: -3px; }
+        .omr-mark.correct { color: #22c55e; text-shadow: 0px 0px 2px #ffffff; }
+        .omr-mark.wrong { color: #ef4444; text-shadow: 0px 0px 2px #ffffff; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-800 font-sans leading-relaxed">
+
+    <header class="bg-blue-900 text-white shadow-md no-print sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">KOLEJ TEKNOLOGI TERMAJU</h1>
+                <p class="text-xs text-blue-200">JABATAN TENAGA MANUSIA, KAMPUS SANDAKAN</p>
+            </div>
+            <div class="mt-2 sm:mt-0 text-right">
+                <span class="inline-block bg-blue-800 text-blue-100 text-xs px-3 py-1 rounded-full font-semibold">
+                    MODUL: ISLAMIC EDUCATION (GIE011) — UJIAN 1
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 sm:p-6">
+
+        <section id="studentFormSection" class="bg-white rounded-lg shadow-md p-6 mb-6 no-print">
+            <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">MAKLUMAT PELAJAR</h2>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-3 mb-5 text-xs text-amber-800">
+                <p class="font-bold mb-1">⚠️ PERATURAN PENILAIAN DALAM TALIAN:</p>
+                <ul class="list-disc list-inside space-y-0.5">
+                    <li>Ujian ini menggunakan sistem <strong>Mod Skrin Penuh (Fullscreen)</strong> secara automatik.</li>
+                    <li>Dilarang menukar tab, membuka aplikasi lain, menyalin teks, atau keluar dari skrin penuh.</li>
+                    <li>Amaran akan diberikan jika pelanggaran dikesan. <strong>3 kali amaran</strong> akan menyebabkan ujian ditamatkan serta-merta.</li>
+                </ul>
+            </div>
+
+            <form id="quizForm" onsubmit="startQuiz(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pelajar <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNama" required placeholder="Contoh: MUHAMMAD AMIR BIN ROSLI" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">No. Kad Pengenalan <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputIC" required placeholder="Contoh: 040512-12-5432" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">NDP (No. Daftar Pelajar) <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNDP" required placeholder="Contoh: 23224012" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Kelas <span class="text-red-500">*</span></label>
+                        <select id="inputKelas" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="" disabled selected>-- Sila Pilih Kelas --</option>
+                            <option value="STAS03 - SEM. 1">STAS03 - SEM. 1</option>
+                            <option value="SWKA03 - SEM. 1">SWKA03 - SEM. 1</option>
+                            <option value="SWFL03 - SEM. 1">SWFL03 - SEM. 1</option>
+                            <option value="SMET03 - SEM. 1">SMET03 - SEM. 1</option>
+                            <option value="SIKR03 - SEM. 1">SIKR03 - SEM. 1</option>
+                            <option value="SETL03 - SEM. 1">SETL03 - SEM. 1</option>
+                            <option value="SMPU03 - SEM. 1">SMPU03 - SEM. 1</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Sesi Latihan <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputSesi" required placeholder="Contoh: SESI 2 / 2026" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tarikh Ujian <span class="text-red-500">*</span></label>
+                        <input type="date" id="inputTarikh" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pegawai Penilai <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputPengajar" value="NUR SYAFIQAH BINTI ARMAN" readonly class="w-full border border-gray-300 bg-gray-100 text-gray-700 font-semibold rounded px-3 py-2 text-sm focus:outline-none cursor-not-allowed">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded transition shadow-md">
+                        MULA JAWAB UJIAN
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="quizQuestionsSection" class="hidden bg-white rounded-lg shadow-md p-6 mb-6 no-print no-select">
+            <div class="flex flex-wrap justify-between items-center border-b pb-3 mb-6 gap-2">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">ISLAMIC EDUCATION (GIE011) - UJIAN 1 (30 SOALAN)</h2>
+                    <p class="text-xs text-gray-500">Pilih SATU jawapan yang tepat bagi setiap soalan.</p>
+                </div>
+                <div class="text-right">
+                    <div id="timerDisplay" class="text-lg font-bold text-red-600 mb-0.5">Masa: 60:00</div>
+                    <div class="flex items-center justify-end space-x-3 text-xs font-bold">
+                        <span id="warningTracker" class="text-amber-600">Amaran: 0 / 3</span>
+                        <span id="progressTracker" class="text-blue-700">0 / 30 Dijawab</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="answersForm" onsubmit="submitAnswers(event)">
+                <div id="questionsContainer" class="space-y-8"></div>
+
+                <div class="mt-8 border-t pt-6 flex justify-end">
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded shadow-md transition">
+                        HANTAR JAWAPAN & JANA BORANG OMR
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="omrSection" class="hidden bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-300">
+            <div class="no-print mb-6 flex justify-between items-center bg-gray-50 p-3 rounded border border-gray-200">
+                <span class="text-xs text-gray-600 font-medium">Borang OMR Rasmi Pelajar - ISLAMIC EDUCATION (GIE011) - UJIAN 1</span>
+                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded shadow">
+                    🖨️ CETAK BORANG OMR / SIMPAN PDF
+                </button>
+            </div>
+
+            <div class="border-b-2 border-gray-800 pb-4 mb-4 relative">
+                <div class="flex justify-end mb-1">
+                    <span class="border border-gray-400 text-[10px] px-2 py-0.5 inline-block font-mono">OMR-GIE011-U1</span>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Coat_of_arms_of_Malaysia.svg/500px-Coat_of_arms_of_Malaysia.svg.png" alt="Jata Negara Malaysia" class="w-20 h-auto object-contain mb-2">
+                    <h2 class="text-base font-bold tracking-wider uppercase">JABATAN TENAGA MANUSIA</h2>
+                    <h1 class="text-xl font-extrabold uppercase text-blue-900">KOLEJ TEKNOLOGI TERMAJU</h1>
+                    <h3 class="text-sm font-semibold uppercase tracking-wide">KAMPUS SANDAKAN</h3>
+                    <p class="text-xs font-medium text-gray-600 mt-1">BORANG JAWAPAN OMR & PENILAIAN ISLAMIC EDUCATION (GIE011) — UJIAN 1</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-xs border border-gray-400 p-3 mb-6 bg-gray-50">
+                <div><span class="font-bold">NAMA PELAJAR:</span> <span id="omrNama" class="uppercase font-mono font-semibold"></span></div>
+                <div><span class="font-bold">NO. KAD PENGENALAN:</span> <span id="omrIC" class="font-mono"></span></div>
+                <div><span class="font-bold">NO. DAFTAR PELAJAR (NDP):</span> <span id="omrNDP" class="font-mono"></span></div>
+                <div><span class="font-bold">KELAS:</span> <span id="omrKelas" class="uppercase font-mono"></span></div>
+                <div><span class="font-bold">SESI LATIHAN:</span> <span id="omrSesi" class="uppercase font-mono"></span></div>
+                <div><span class="font-bold">TARIKH UJIAN:</span> <span id="omrTarikh"></span></div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-bold uppercase mb-2 text-center tracking-wider border-b pb-1">PETAK JAWAPAN OMR (30 SOALAN)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2 text-xs">
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol1"></div>
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol2"></div>
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol3"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 border-2 border-gray-800 p-4 mb-6">
+                <div class="flex flex-col justify-center items-center border-r border-gray-400 pr-4">
+                    <span class="text-xs font-bold uppercase text-gray-600">JUMLAH MARKAH KESELURUHAN</span>
+                    <div class="text-3xl font-extrabold my-1" id="omrMarkahPercent">0%</div>
+                    <span class="text-xs font-medium text-gray-500" id="omrMarkahDetail">(0 / 30 Soalan Betul)</span>
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <span class="text-xs font-bold uppercase text-gray-600">KEPUTUSAN PENILAIAN</span>
+                    <div class="text-2xl font-black mt-1 px-4 py-1 rounded" id="omrKeputusanBadge"></div>
+                </div>
+            </div>
+
+            <div class="border border-gray-400 p-4 text-xs bg-gray-50">
+                <h4 class="font-bold uppercase text-gray-800 mb-2 border-b border-gray-300 pb-1">PERAKUAN SEMAKAN OLEH PEGAWAI PENILAI (PP)</h4>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <p><span class="font-bold">NAMA PEGAWAI PENILAI (PP):</span> <span id="omrPengajar" class="uppercase font-semibold"></span></p>
+                        <p class="mt-4"><span class="font-bold">TANDATANGAN:</span> ___________________________</p>
+                    </div>
+                    <div class="text-right flex flex-col justify-end">
+                        <p><span class="font-bold">TARIKH SEMAKAN:</span> <span id="omrTarikhSemakan"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const questionsData = [
+            { no: 1, q: "Apakah maksud perkataan akidah dari segi Bahasa ?", options: { A: "Kepercayaan yang kukuh dalam hati", B: "Peraturan hidup harian yang lengkap", C: "Ucapan lisan tanpa keyakinan dalam jiwa", D: "Amalan lahiriah yang dilaksanakan di masjid sahaja" }, ans: "A" },
+            { no: 2, q: "Antara berikut, yang manakah merupakan empat sumber utama akidah Islam?\ni. Al-Quran al-Karim\nii. As-Sunnah (hadis mutawatir)\niii. Ijmak ulama mujtahid\niv. Adat resam nenek moyang", options: { A: "i dan ii", B: "i, ii dan iii", C: "i, iii dan iv sahaja", D: "i, ii, iii dan juga iv" }, ans: "B" },
+            { no: 3, q: "Manakah antara berikut tergolong dalam lima ciri utama Akidah Islam?\ni. Sahih\nii. Akidah Fitrah\niii. Bersifat Wasatiyyah\niv. Bersifat Tetap serta Jelas dan Terang", options: { A: "i dan ii", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "D" },
+            { no: 4, q: "Apakah bahan asal penciptaan malaikat menurut hadis riwayat Muslim yang dinyatakan dalam modul?", options: { A: "Cahaya", B: "Tanah liat", C: "Api yang berasap", D: "Air laut dan embun pagi" }, ans: "A" },
+            { no: 5, q: "Malaikat manakah yang ditugaskan oleh Allah SWT untuk mengawal cakerawala termasuk matahari, bulan, bintang serta keadaan hujan dan panas?", options: { A: "Malik", B: "Mikail", C: "Israfil", D: "Mungkar dan Nakir" }, ans: "B" },
+            { no: 6, q: "Padanan kitab suci dan bahasa asalnya yang manakah tepat berdasarkan huraian modul?\ni. Kitab Zabur — Bahasa Qibti\nii. Kitab Taurat — Bahasa Ibrani\niii. Kitab Injil — Bahasa Suryani\niv. Kitab Al-Quran — Bahasa Arab", options: { A: "i dan ii", B: "ii dan iii sahaja", C: "i, ii, iii dan juga iv", D: "i, iii dan iv semuanya sahaja" }, ans: "C" },
+            { no: 7, q: "Berapakah bilangan sifat wajib bagi para rasul yang perlu diketahui dan diimani oleh setiap Muslim?", options: { A: "Dua sifat", B: "Tiga sifat", C: "Empat sifat", D: "Enam sifat utama" }, ans: "C" },
+            { no: 8, q: "Perkara yang menyebabkan rosaknya iman dan Islam terbahagi kepada tiga bahagian utama iaitu:", options: { A: "Niat, rukun dan syarat", B: "Iktikad, perkataan dan perbuatan", C: "Kufur, syirik serta sifat mazmumah", D: "Ibadah khusus, ibadah umum dan muamalat" }, ans: "B" },
+            { no: 9, q: "Bagaimanakah keyakinan terhadap akidah yang sempurna dapat dibuktikan dalam kehidupan seorang Muslim?", options: { A: "Sekadar mengaku beriman di hati", B: "Mengucapkan syahadah tanpa sebarang amalan", C: "Mempelajari ilmu falsafah tanpa panduan wahyu", D: "Melaksanakan perintah Allah dan meninggalkan larangan-Nya" }, ans: "D" },
+            { no: 10, q: "Mengapakah hadis mutawatir diterima secara ijmak sebagai sumber akidah Islam?", options: { A: "Kerana ia diriwayatkan oleh seorang perawi sahaja", B: "Kerana ia ditulis oleh ahli sejarah pada zaman moden", C: "Kerana perawinya ramai dan mustahil bersepakat berdusta", D: "Kerana ia menggantikan kedudukan al-Quran sebagai sumber pertama" }, ans: "C" },
+            { no: 11, q: "Mengapakah sumber akal dalam akidah Islam tidak boleh dipisahkan daripada bimbingan sumber syarak?", options: { A: "Kerana akal sentiasa menolak kebenaran", B: "Kerana sumber syarak hanya untuk ibadah", C: "Kerana fitrah manusia tidak mengenal Tuhan", D: "Kerana akal semata-mata tidak menjamin mencapai kebenaran" }, ans: "D" },
+            { no: 12, q: "Apakah faktor yang boleh menyebabkan fitrah akidah asal seseorang manusia menjadi kotor atau terpesong?", options: { A: "Bentuk asuhan dan didikan ibu bapa", B: "Pengamalan sifat wasatiyyah dalam ibadah", C: "Kepatuhan terhadap dalil naqli daripada al-Quran", D: "Kesediaan minda memerhatikan tanda kebesaran alam" }, ans: "A" },
+            { no: 13, q: "Apakah hikmah beriman kepada Malaikat Raqib dan 'Atid terhadap tingkah laku harian seseorang Muslim?", options: { A: "Menjamin semua dosa kecil diampunkan tanpa perlu bertaubat", B: "Mendorong seseorang menjauhi pergaulan dengan masyarakat setempat", C: "Menyebabkan seseorang mengabaikan tuntutan kerja demi beruzlah di rumah", D: "Mendorong seseorang menjaga tutur kata dan segera bertaubat apabila tersilap" }, ans: "D" },
+            { no: 14, q: "Apakah perbezaan utama antara perutusan Nabi Muhammad SAW berbanding para rasul terdahulu?", options: { A: "Baginda diutus kepada seluruh umat manusia", B: "Baginda hanya menyampaikan syariat untuk kaum Arab", C: "Baginda tidak dibekalkan dengan sebarang kitab suci wahyu", D: "Baginda merupakan rasul pertama dalam senarai 25 rasul wajib diketahui" }, ans: "A" },
+            { no: 15, q: "Apakah perbezaan antara Qada' dan Qadar ?", options: { A: "Qada' ialah doa harian, manakala Qadar ialah usaha manusia", B: "Qada' ialah kejadian yang berlaku, manakala Qadar ialah ukuran ketentuan", C: "Qada' hanya berkaitan perkara baik, manakala Qadar berkaitan musibah sahaja", D: "Qada' boleh diubah tanpa kehendak Allah, manakala Qadar tidak diketahui oleh-Nya" }, ans: "B" },
+            { no: 16, q: "Mengapakah Ahli Sunnah wal Jamaah menerima ijmak ulama sebagai salah satu sumber akidah dan syariah Islam?\ni. Para mujtahid tidak mungkin bersepakat atas perkara kesesatan\nii. Pertolongan Allah SWT sentiasa bersama jemaah umat Islam\niii. Menentang jalan orang mukmin mengundang ancaman azab neraka\niv. Ijmak boleh membatalkan ayat-ayat muhkamat dalam al-Quran", options: { A: "i dan ii", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "B" },
+            { no: 17, q: "Bagaimanakah ciri Wasatiyyah dalam Akidah Islam menyeimbangkan pandangan tentang sifat Allah SWT dan kedudukan para nabi?\ni. Menolak fahaman yang menjisimkan atau menyerupakan Tuhan dengan makhluk (al-tashbih)\nii. Menolak fahaman yang menafikan sifat kesempurnaan Tuhan (al-ta'til)\niii. Tidak merendahkan martabat nabi dan tidak pula mempertuhankannya\niv. Menerima pegangan akidah berdasarkan sangkaan (zhan) semata-mata", options: { A: "i dan iv", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii dan juga iv" }, ans: "B" },
+            { no: 18, q: "Mengapakah sebarang tokok tambah dalam urusan akidah dan agama Islam dianggap tertolak menurut ciri Akidah Bersifat Tetap?", options: { A: "Kerana manusia dibenarkan mengubah prinsip asas mengikut budaya", B: "Kerana ia bidaah tertolak dan hak menggubal syariat hanya milik Allah", C: "Kerana ajaran Islam hanya sesuai diamalkan pada zaman dahulu kala sahaja", D: "Kerana ulama mutakhir mempunyai kuasa mutlak mencipta rukun iman yang baharu" }, ans: "B" },
+            { no: 19, q: "Apakah kedudukan Al-Quran berbanding kitab-kitab samawi terdahulu seperti Taurat, Zabur dan Injil?\ni. Kitab terakhir dan penutup kepada kitab-kitab terdahulu\nii. Mengesahkan kebenaran isi kitab-kitab suci sebelumnya\niii. Menjadi Al-Furqan yang membezakan antara yang benar dan salah\niv. Dijamin keasliannya oleh Allah SWT sepanjang zaman", options: { A: "i dan ii", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii dan juga iv" }, ans: "D" },
+            { no: 20, q: "Manakah antara pernyataan berikut merupakan contoh perkara yang membatalkan akidah dari sudut iktikad?", options: { A: "Sujud kepada makhluk tanpa niat menyembahnya", B: "Mengucapkan kata-kata mengejek nama Allah secara lisan", C: "Meyakini alam ini qadim dan tiada pencipta yang menciptanya", D: "Menghadiri upacara ibadat orang kafir menurut tatacara mereka" }, ans: "C" },
+            { no: 21, q: "Seorang pelatih ILJTM ingin memastikan kesahihan sesuatu persoalan berkaitan akidah Islam. Susun rujukan sumber akidah berikut mengikut urutan keutamaan yang betul berdasarkan modul:\ni. Ijmak ulama mujtahid\nii. Al-Quran al-Karim\niii. Akal dan fitrah yang dipandu syarak\niv. As-Sunnah (hadis mutawatir)", options: { A: "ii, iv, i, iii", B: "iv, ii, i dan iii", C: "ii, i, iv dan iii sahaja", D: "i, ii, iv dan juga iii sahaja" }, ans: "A" },
+            { no: 22, q: "Dalam menjalankan tugas sebagai ketua kumpulan bengkel, Hafiz sentiasa menyampaikan arahan pengajar dengan tepat, bersikap jujur menguruskan peralatan serta bijak menyelesaikan konflik ahli. Sifat wajib rasul manakah yang sedang diteladani oleh Hafiz?\ni. Siddiq\nii. Amanah\niii. Tabligh\niv. Fathonah", options: { A: "i dan ii", B: "ii, iii dan iv", C: "i, ii, iii dan iv", D: "i, iii dan juga iv sahaja" }, ans: "C" },
+            { no: 23, q: "Syarifah gagal dalam temu duga pekerjaan pertamanya walaupun telah membuat persediaan awal. Bagaimanakah cara pengaplikasian iman kepada Qada' dan Qadar yang paling tepat bagi Syarifah?", options: { A: "Bersabar, berdoa dan terus berikhtiar", B: "Berputus asa dan berhenti memohon kerja", C: "Menyalahkan takdir tanpa perlu berusaha lagi", D: "Mempercayai nasib buruknya kekal tanpa boleh diubah" }, ans: "A" },
+            { no: 24, q: "Dalam satu perbincangan isu ekonomi, seorang rakan berkata: 'Zaman sekarang tidak patut diharamkan riba kerana ia menghalang kemajuan.' Berdasarkan pembelajaran dalam Modul GIE011, apakah implikasi ungkapan tersebut terhadap akidahnya?", options: { A: "Dikira sebagai pandangan akademik yang bebas", B: "Hanya berdosa kecil jika tidak mengamalkan riba", C: "Membatalkan akidah melalui perkataan yang mengingkari hukum", D: "Tidak menjejaskan iman selagi dia menunaikan solat lima waktu" }, ans: "C" },
+            { no: 25, q: "Dalam satu majlis persembahan budaya, seorang Muslim melakukan tunduk hormat kepada patung tokoh sehingga mencapai had rukuk sembahyang sambil berniat di dalam hati bahawa itu hanyalah adat penghormatan semata-mata. Apakah status akidahnya?", options: { A: "Akidahnya terbatal kerana menyamai pengagungan Allah", B: "Akidahnya kekal terpelihara kerana niatnya sekadar adat", C: "Hanya dihukum makruh tanzih tanpa menjejaskan syahadahnya", D: "Sah di sisi syarak selagi tidak membaca mantera penyembahan" }, ans: "A" },
+            { no: 26, q: "Seorang pelajar menerima satu fahaman baharu mengenai sifat Tuhan yang hanya bersandarkan sangkaan (zhan) peribadi gurunya dan menyerupakan Allah dengan sifat makhluk fizikal. Ciri Akidah Islam manakah yang telah dicanggahi oleh fahaman tersebut?\ni. Ciri Sahih — kerana akidah Islam menolak sangkaan (zhan) tanpa dalil kebenaran\nii. Ciri Wasatiyyah — kerana menyerupakan Tuhan dengan makhluk (al-tashbih) adalah melampau\niii. Ciri Bersifat Tetap — kerana menambah pegangan baharu yang tiada dalam ajaran Islam\niv. Ciri Jelas dan Terang — kerana menyukarkan kefahaman tauhid yang murni", options: { A: "i dan ii", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "D" },
+            { no: 27, q: "Sebuah kumpulan ajaran mendakwa bahawa syariat yang dibawa oleh Nabi Muhammad SAW secara zahir telah lapuk dan hanya perlu mengikut ajaran 'Muhammad batin' untuk zaman moden. Mengapakah dakwaan kumpulan ini membatalkan akidah?\ni. Beriktikad hukum Islam lapuk dan tidak praktikal pada zaman moden\nii. Menafikan kebenaran kerasulan Nabi Muhammad SAW secara zahir\niii. Mengadakan tokok tambah bidaah terhadap akidah Islam yang tetap\niv. Mengingkari Al-Quran sebagai petunjuk sepanjang zaman hingga kiamat", options: { A: "i dan ii", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii dan juga iv" }, ans: "D" },
+            { no: 28, q: "Ketika kapal terbang mengalami kerosakan enjin di udara, seorang penumpang yang selama ini mengaku tidak mempercayai agama tiba-tiba berdoa menyebut nama Tuhan memohon keselamatan. Fenomena ini membuktikan kebenaran konsep sumber akidah yang mana?", options: { A: "Sumber fitrah manusia yang mengenal Allah", B: "Sumber ijmak ulama yang disepakati para mujtahid", C: "Sumber hadis mutawatir yang diriwayatkan perawi ramai", D: "Sumber akal daruri yang terpisah sepenuhnya daripada wahyu" }, ans: "A" },
+            { no: 29, q: "Berdasarkan contoh peristiwa Ahmad dalam modul (ditentukan sakit pada 1 Muharram lalu dia jatuh sakit pada tarikh tersebut), padankan konsep Qada' dan Qadar serta langkah pengukuhan iman yang wajar diambil mengikut turutan yang betul:\ni. Tarikh 1 Muharram yang ditetapkan sejak azali ialah Qadar (takdir)\nii. Penyakit yang menimpa Ahmad pada 1 Muharram ialah Qada'\niii. Ahmad perlu bersabar terhadap musibah dan bersyukur atas nikmat lain\niv. Ahmad wajar berdoa dan berikhtiar mendapatkan rawatan perubatan", options: { A: "i dan ii", B: "i, ii dan iii", C: "i, ii, iii dan iv", D: "ii, iii dan juga iv sahaja" }, ans: "C" },
+            { no: 30, q: "Seorang pekerja bengkel sering melakukan penipuan masa kerja apabila tiada penyelia yang memerhati, dengan alasan tiada sesiapa yang tahu. Bagaimanakah penghayatan Rukun Iman dapat membetulkan sikap pekerja tersebut?\ni. Menyedari Malaikat Raqib dan 'Atid mencatat setiap tutur kata dan perbuatan\nii. Menginsafi bahawa setiap amalan akan disoal oleh Malaikat Mungkar dan Nakir di kubur\niii. Meyakini adanya kehidupan akhirat selepas mati untuk pembalasan segala amalan\niv. Menganggap kesalahan kecil di dunia tidak direkodkan selagi majikan tidak melihat", options: { A: "i dan ii", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "B" }
+        ];
+
+        let studentDetails = {};
+        const studentAnswers = {};
+        let timerInterval = null;
+        let timeRemaining = 60 * 60;
+
+        let warningCount = 0;
+        const maxWarnings = 3;
+        let isQuizActive = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('hasTakenQuiz_GIE011_U1') === 'true') {
+                alert("Anda telah mengambil penilaian ini. Setiap pelajar hanya dibenarkan mengambil ujian ini SEKALI sahaja.");
+                document.body.innerHTML = `
+                    <div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+                        <div class="bg-white p-8 rounded-lg shadow-md text-center max-w-md border border-red-300">
+                            <h2 class="text-xl font-bold text-red-600 mb-2">AKSES DIHALANG</h2>
+                            <p class="text-sm text-gray-700">Anda telah menghantar ISLAMIC EDUCATION (GIE011) - UJIAN 1 ini sebelum ini. Penilaian hanya boleh diambil satu kali sahaja.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        function startQuiz(e) {
+            e.preventDefault();
+            studentDetails = {
+                nama: document.getElementById('inputNama').value,
+                ic: document.getElementById('inputIC').value,
+                ndp: document.getElementById('inputNDP').value,
+                kelas: document.getElementById('inputKelas').value,
+                sesi: document.getElementById('inputSesi').value,
+                tarikh: document.getElementById('inputTarikh').value,
+                pengajar: document.getElementById('inputPengajar').value
+            };
+
+            document.getElementById('studentFormSection').classList.add('hidden');
+            document.getElementById('quizQuestionsSection').classList.remove('hidden');
+            
+            renderQuestions();
+            startTimer();
+            initAntiCheat();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function initAntiCheat() {
+            isQuizActive = true;
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(() => {});
+            }
+
+            document.addEventListener('contextmenu', event => { if (isQuizActive) event.preventDefault(); });
+
+            ['copy', 'cut', 'paste'].forEach(evt => {
+                document.addEventListener(evt, event => {
+                    if (isQuizActive) {
+                        event.preventDefault();
+                        alert("⚠️ AMARAN: Fungsi salin dan tampal (Copy/Paste) adalah dilarang semasa ujian!");
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!isQuizActive) return;
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C' || e.key === 'p' || e.key === 'P'))) {
+                    e.preventDefault();
+                    alert("⚠️ AMARAN: Kekunci pintasan tidak dibenarkan semasa ujian!");
+                }
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (isQuizActive && document.hidden) triggerCheatWarning("Anda dikesan meninggalkan tab ujian atau membuka aplikasi lain!");
+            });
+
+            window.addEventListener('blur', () => {
+                if (isQuizActive) triggerCheatWarning("Tetingkap ujian hilang fokus! Jangan buka aplikasi atau tetingkap lain.");
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                if (isQuizActive && !document.fullscreenElement) triggerCheatWarning("Anda telah keluar daripada mod Skrin Penuh (Fullscreen)!");
+            });
+        }
+
+        function triggerCheatWarning(reason) {
+            if (!isQuizActive) return;
+            warningCount++;
+            document.getElementById('warningTracker').innerText = `Amaran: ${warningCount} / ${maxWarnings}`;
+
+            if (warningCount >= maxWarnings) {
+                isQuizActive = false;
+                alert(`🚨 UJIAN DITAMATKAN!\n\nSebab: ${reason}\nAnda telah melanggar peraturan keselamatan sebanyak ${maxWarnings} kali. Jawapan anda dihantar secara automatik.`);
+                autoSubmitAnswers();
+            } else {
+                alert(`⚠️ AMARAN PELANGGARAN (${warningCount}/${maxWarnings})!\n\n${reason}\n\nJika anda melakukannya sehingga ${maxWarnings} kali, ujian ini akan ditamatkan serta-merta.`);
+                if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                }
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timerDisplay').innerText = `Masa: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    isQuizActive = false;
+                    alert("Masa 60 minit telah tamat! Jawapan anda akan dihantar secara automatik.");
+                    autoSubmitAnswers();
+                }
+            }, 1000);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const qCard = document.createElement('div');
+                qCard.className = 'border border-gray-200 rounded-lg p-5 bg-gray-50 hover:bg-white transition shadow-sm';
+                
+                let optionsHTML = '';
+                for (const key in q.options) {
+                    optionsHTML += `
+                        <label class="flex items-start space-x-3 p-2.5 rounded hover:bg-blue-50 cursor-pointer border border-transparent hover:border-blue-200 transition">
+                            <input type="radio" name="question_${q.no}" value="${key}" onchange="recordAnswer(${q.no}, '${key}')" class="mt-0.5 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                            <span class="text-sm font-medium text-gray-800"><strong class="text-blue-900">${key}.</strong> ${q.options[key].replace(/\n/g, '<br>')}</span>
+                        </label>
+                    `;
+                }
+
+                qCard.innerHTML = `
+                    <p class="font-bold text-base text-blue-950 mb-3 whitespace-pre-line">${q.no}. ${q.q}</p>
+                    <div class="space-y-1.5">${optionsHTML}</div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function recordAnswer(qNo, selectedOption) {
+            studentAnswers[qNo] = selectedOption;
+            const count = Object.keys(studentAnswers).length;
+            document.getElementById('progressTracker').innerText = `${count} / 30 Dijawab`;
+        }
+
+        function submitAnswers(e) {
+            e.preventDefault();
+            if (Object.keys(studentAnswers).length < 30) {
+                if (!confirm("Anda belum menjawab semua soalan. Adakah anda pasti mahu menghantar?")) return;
+            }
+            processSubmission();
+        }
+
+        function autoSubmitAnswers() { processSubmission(); }
+
+        function processSubmission() {
+            isQuizActive = false;
+            if (timerInterval) clearInterval(timerInterval);
+            if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+
+            localStorage.setItem('hasTakenQuiz_GIE011_U1', 'true');
+
+            document.getElementById('quizQuestionsSection').classList.add('hidden');
+            document.getElementById('omrSection').classList.remove('hidden');
+
+            generateOMR();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateOMR() {
+            document.getElementById('omrNama').innerText = studentDetails.nama;
+            document.getElementById('omrIC').innerText = studentDetails.ic;
+            document.getElementById('omrNDP').innerText = studentDetails.ndp;
+            document.getElementById('omrKelas').innerText = studentDetails.kelas;
+            document.getElementById('omrSesi').innerText = studentDetails.sesi;
+            document.getElementById('omrTarikh').innerText = formatDate(studentDetails.tarikh);
+            document.getElementById('omrPengajar').innerText = studentDetails.pengajar;
+            document.getElementById('omrTarikhSemakan').innerText = formatDate(studentDetails.tarikh);
+
+            let totalCorrect = 0;
+            const col1 = document.getElementById('omrCol1');
+            const col2 = document.getElementById('omrCol2');
+            const col3 = document.getElementById('omrCol3');
+            col1.innerHTML = ''; col2.innerHTML = ''; col3.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const userAns = studentAnswers[q.no] || null;
+                const isCorrect = userAns === q.ans;
+                if (isCorrect) totalCorrect++;
+
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between py-1 border-b border-gray-200 last:border-b-0';
+
+                let bubblesHTML = '';
+                ['A', 'B', 'C', 'D'].forEach(opt => {
+                    let isFilled = (userAns === opt);
+                    let markHTML = isFilled ? (isCorrect ? `<span class="omr-mark correct">✓</span>` : `<span class="omr-mark wrong">✗</span>`) : '';
+                    bubblesHTML += `<div class="omr-bubble ${isFilled ? 'filled' : ''}">${opt}${markHTML}</div>`;
+                });
+
+                row.innerHTML = `<span class="font-bold w-6 text-gray-700">${q.no.toString().padStart(2, '0')}.</span><div class="flex space-x-2">${bubblesHTML}</div>`;
+                if (q.no <= 10) col1.appendChild(row);
+                else if (q.no <= 20) col2.appendChild(row);
+                else col3.appendChild(row);
+            });
+
+            const percentage = Math.round((totalCorrect / 30) * 100);
+            document.getElementById('omrMarkahPercent').innerText = `${percentage}%`;
+            document.getElementById('omrMarkahDetail').innerText = `(${totalCorrect} / 30 Soalan Betul)`;
+
+            const badge = document.getElementById('omrKeputusanBadge');
+            if (percentage >= 60) {
+                badge.innerText = "TERAMPIL";
+                badge.className = "text-2xl font-black mt-1 px-4 py-1 rounded bg-green-100 text-green-800 border border-green-400";
+            } else {
+                badge.innerText = "BELUM TERAMPIL";
+                badge.className = "text-2xl font-black mt-1 px-4 py-1 rounded bg-red-100 text-red-800 border border-red-400";
+            }
+        }
+
+        function formatDate(str) {
+            if (!str) return '';
+            const parts = str.split('-');
+            return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : str;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISLAMIC EDUCATION (GIE011) - UJIAN 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background-color: white !important; color: black !important; }
+            .page-break { page-break-before: always; }
+        }
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .omr-bubble {
+            width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #374151;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: bold; position: relative; background-color: #fff;
+        }
+        .omr-bubble.filled { background-color: #111827 !important; color: #ffffff !important; }
+        .omr-mark { position: absolute; font-size: 16px; font-weight: 900; line-height: 1; top: -3px; }
+        .omr-mark.correct { color: #22c55e; text-shadow: 0px 0px 2px #ffffff; }
+        .omr-mark.wrong { color: #ef4444; text-shadow: 0px 0px 2px #ffffff; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-800 font-sans leading-relaxed">
+
+    <header class="bg-blue-900 text-white shadow-md no-print sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">KOLEJ TEKNOLOGI TERMAJU</h1>
+                <p class="text-xs text-blue-200">JABATAN TENAGA MANUSIA, KAMPUS SANDAKAN</p>
+            </div>
+            <div class="mt-2 sm:mt-0 text-right">
+                <span class="inline-block bg-blue-800 text-blue-100 text-xs px-3 py-1 rounded-full font-semibold">
+                    MODUL: ISLAMIC EDUCATION (GIE011) — UJIAN 2
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 sm:p-6">
+
+        <section id="studentFormSection" class="bg-white rounded-lg shadow-md p-6 mb-6 no-print">
+            <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">MAKLUMAT PELAJAR</h2>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-3 mb-5 text-xs text-amber-800">
+                <p class="font-bold mb-1">⚠️ PERATURAN PENILAIAN DALAM TALIAN:</p>
+                <ul class="list-disc list-inside space-y-0.5">
+                    <li>Ujian ini menggunakan sistem <strong>Mod Skrin Penuh (Fullscreen)</strong> secara automatik.</li>
+                    <li>Dilarang menukar tab, membuka aplikasi lain, menyalin teks, atau keluar dari skrin penuh.</li>
+                    <li>Amaran akan diberikan jika pelanggaran dikesan. <strong>3 kali amaran</strong> akan menyebabkan ujian ditamatkan serta-merta.</li>
+                </ul>
+            </div>
+
+            <form id="quizForm" onsubmit="startQuiz(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pelajar <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNama" required placeholder="Contoh: MUHAMMAD AMIR BIN ROSLI" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">No. Kad Pengenalan <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputIC" required placeholder="Contoh: 040512-12-5432" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">NDP (No. Daftar Pelajar) <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNDP" required placeholder="Contoh: 23224012" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Kelas <span class="text-red-500">*</span></label>
+                        <select id="inputKelas" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="" disabled selected>-- Sila Pilih Kelas --</option>
+                            <option value="STAS03 - SEM. 1">STAS03 - SEM. 1</option>
+                            <option value="SWKA03 - SEM. 1">SWKA03 - SEM. 1</option>
+                            <option value="SWFL03 - SEM. 1">SWFL03 - SEM. 1</option>
+                            <option value="SMET03 - SEM. 1">SMET03 - SEM. 1</option>
+                            <option value="SIKR03 - SEM. 1">SIKR03 - SEM. 1</option>
+                            <option value="SETL03 - SEM. 1">SETL03 - SEM. 1</option>
+                            <option value="SMPU03 - SEM. 1">SMPU03 - SEM. 1</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Sesi Latihan <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputSesi" required placeholder="Contoh: SESI 2 / 2026" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tarikh Ujian <span class="text-red-500">*</span></label>
+                        <input type="date" id="inputTarikh" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pegawai Penilai <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputPengajar" value="NUR SYAFIQAH BINTI ARMAN" readonly class="w-full border border-gray-300 bg-gray-100 text-gray-700 font-semibold rounded px-3 py-2 text-sm focus:outline-none cursor-not-allowed">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded transition shadow-md">
+                        MULA JAWAB UJIAN
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="quizQuestionsSection" class="hidden bg-white rounded-lg shadow-md p-6 mb-6 no-print no-select">
+            <div class="flex flex-wrap justify-between items-center border-b pb-3 mb-6 gap-2">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">ISLAMIC EDUCATION (GIE011) - UJIAN 2 (30 SOALAN)</h2>
+                    <p class="text-xs text-gray-500">Pilih SATU jawapan yang tepat bagi setiap soalan.</p>
+                </div>
+                <div class="text-right">
+                    <div id="timerDisplay" class="text-lg font-bold text-red-600 mb-0.5">Masa: 60:00</div>
+                    <div class="flex items-center justify-end space-x-3 text-xs font-bold">
+                        <span id="warningTracker" class="text-amber-600">Amaran: 0 / 3</span>
+                        <span id="progressTracker" class="text-blue-700">0 / 30 Dijawab</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="answersForm" onsubmit="submitAnswers(event)">
+                <div id="questionsContainer" class="space-y-8"></div>
+
+                <div class="mt-8 border-t pt-6 flex justify-end">
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded shadow-md transition">
+                        HANTAR JAWAPAN & JANA BORANG OMR
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="omrSection" class="hidden bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-300">
+            <div class="no-print mb-6 flex justify-between items-center bg-gray-50 p-3 rounded border border-gray-200">
+                <span class="text-xs text-gray-600 font-medium">Borang OMR Rasmi Pelajar - ISLAMIC EDUCATION (GIE011) - UJIAN 2</span>
+                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded shadow">
+                    🖨️ CETAK BORANG OMR / SIMPAN PDF
+                </button>
+            </div>
+
+            <div class="border-b-2 border-gray-800 pb-4 mb-4 relative">
+                <div class="flex justify-end mb-1">
+                    <span class="border border-gray-400 text-[10px] px-2 py-0.5 inline-block font-mono">OMR-GIE011-U2</span>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Coat_of_arms_of_Malaysia.svg/500px-Coat_of_arms_of_Malaysia.svg.png" alt="Jata Negara Malaysia" class="w-20 h-auto object-contain mb-2">
+                    <h2 class="text-base font-bold tracking-wider uppercase">JABATAN TENAGA MANUSIA</h2>
+                    <h1 class="text-xl font-extrabold uppercase text-blue-900">KOLEJ TEKNOLOGI TERMAJU</h1>
+                    <h3 class="text-sm font-semibold uppercase tracking-wide">KAMPUS SANDAKAN</h3>
+                    <p class="text-xs font-medium text-gray-600 mt-1">BORANG JAWAPAN OMR & PENILAIAN ISLAMIC EDUCATION (GIE011) — UJIAN 2</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-xs border border-gray-400 p-3 mb-6 bg-gray-50">
+                <div><span class="font-bold">NAMA PELAJAR:</span> <span id="omrNama" class="uppercase font-mono font-semibold"></span></div>
+                <div><span class="font-bold">NO. KAD PENGENALAN:</span> <span id="omrIC" class="font-mono"></span></div>
+                <div><span class="font-bold">NO. DAFTAR PELAJAR (NDP):</span> <span id="omrNDP" class="font-mono"></span></div>
+                <div><span class="font-bold">KELAS:</span> <span id="omrKelas" class="uppercase font-mono"></span></div>
+                <div><span class="font-bold">SESI LATIHAN:</span> <span id="omrSesi" class="uppercase font-mono"></span></div>
+                <div><span class="font-bold">TARIKH UJIAN:</span> <span id="omrTarikh"></span></div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-bold uppercase mb-2 text-center tracking-wider border-b pb-1">PETAK JAWAPAN OMR (30 SOALAN)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2 text-xs">
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol1"></div>
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol2"></div>
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol3"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 border-2 border-gray-800 p-4 mb-6">
+                <div class="flex flex-col justify-center items-center border-r border-gray-400 pr-4">
+                    <span class="text-xs font-bold uppercase text-gray-600">JUMLAH MARKAH KESELURUHAN</span>
+                    <div class="text-3xl font-extrabold my-1" id="omrMarkahPercent">0%</div>
+                    <span class="text-xs font-medium text-gray-500" id="omrMarkahDetail">(0 / 30 Soalan Betul)</span>
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <span class="text-xs font-bold uppercase text-gray-600">KEPUTUSAN PENILAIAN</span>
+                    <div class="text-2xl font-black mt-1 px-4 py-1 rounded" id="omrKeputusanBadge"></div>
+                </div>
+            </div>
+
+            <div class="border border-gray-400 p-4 text-xs bg-gray-50">
+                <h4 class="font-bold uppercase text-gray-800 mb-2 border-b border-gray-300 pb-1">PERAKUAN SEMAKAN OLEH PEGAWAI PENILAI (PP)</h4>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <p><span class="font-bold">NAMA PEGAWAI PENILAI (PP):</span> <span id="omrPengajar" class="uppercase font-semibold"></span></p>
+                        <p class="mt-4"><span class="font-bold">TANDATANGAN:</span> ___________________________</p>
+                    </div>
+                    <div class="text-right flex flex-col justify-end">
+                        <p><span class="font-bold">TARIKH SEMAKAN:</span> <span id="omrTarikhSemakan"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const questionsData = [
+            { no: 1, q: "Apakah maksud perkataan nikah dari segi Bahasa ?", options: { A: "Berkumpul dan bercampur", B: "Melepaskan ikatan perjanjian", C: "Menahan diri daripada sesuatu perkara", D: "Menyerahkan harta sebagai cagaran hutang" }, ans: "A" },
+            { no: 2, q: "Antara berikut, yang manakah merupakan rukun perkahwinan yang wajib dipenuhi dalam Islam?\ni. Calon suami dan calon isteri yang tertentu\nii. Wali dan dua orang saksi yang memenuhi syarat\niii. Majlis kenduri kesyukuran (walimatulurus)\niv. Ijab dan kabul antara wali dengan pengantin lelaki", options: { A: "i, ii dan iv", B: "i, ii dan iii sahaja", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "A" },
+            { no: 3, q: "Susun proses peminangan berikut mengikut turutan yang betul sebagaimana digariskan dalam modul:\ni. Merisik atau menyiasat latar belakang bakal pasangan\nii. Meminang bagi menentukan tarikh perkahwinan dan mahar\niii. Mengenal pasti perempuan pilihan mengikut kriteria", options: { A: "i, ii, iii", B: "iii, i dan ii", C: "iii, ii dan i sahaja", D: "ii, iii dan i seterusnya" }, ans: "B" },
+            { no: 4, q: "Apakah hukum menjatuhkan talak sewaktu isteri sedang berada dalam keadaan haid atau nifas?", options: { A: "Sunat", B: "Harus sahaja", C: "Haram (bidaah)", D: "Wajib dilaksanakan segera" }, ans: "C" },
+            { no: 5, q: "Berapakah tempoh idah bagi seorang isteri yang kematian suaminya dalam keadaan tidak mengandung ?", options: { A: "Tiga bulan", B: "Tiga kali suci", C: "4 bulan 10 hari", D: "Sehingga berkahwin semula" }, ans: "C" },
+            { no: 6, q: "Berapakah bilangan maksimum isteri yang dibenarkan bagi seorang lelaki dalam satu masa menurut pensyariatan poligami dalam Islam?", options: { A: "Dua orang", B: "Tiga orang sahaja", C: "Lima orang secara sah", D: "Empat orang isteri sahaja" }, ans: "D" },
+            { no: 7, q: "Apakah hukum asal bagi aktiviti jual beli menurut syariat Islam?", options: { A: "Harus", B: "Sunat sahaja", C: "Makruh dilakukan", D: "Wajib pada setiap masa" }, ans: "A" },
+            { no: 8, q: "Apakah maksud perkataan ar-Rahnu (gadaian) dari sudut istilah syarak?", options: { A: "Menukar harta dengan harta", B: "Memberi pinjaman dengan faedah", C: "Akad memiliki manfaat dengan bayaran", D: "Menjadikan harta bernilai sebagai cagaran hutang" }, ans: "D" },
+            { no: 9, q: "Bagaimanakah kedatangan Islam mengubah kedudukan wanita berbanding sistem perkahwinan pada zaman Jahiliah?", options: { A: "Menafikan hak mewarisi harta", B: "Mengangkat martabat dan hak wanita", C: "Menjadikan wanita sebagai barang dagangan", D: "Membenarkan pembunuhan bayi perempuan kerana miskin" }, ans: "B" },
+            { no: 10, q: "Apakah perbezaan antara Mahar Misil dengan Mahar Musamma menurut huraian modul?", options: { A: "Mahar Misil ialah bayaran tunai sahaja", B: "Mahar Musamma tidak perlu persetujuan kedua pihak", C: "Mahar Misil dinilai mengikut mahar saudara perempuan terdekat", D: "Mahar Musamma hanya dibayar selepas berlaku perceraian talak tiga" }, ans: "C" },
+            { no: 11, q: "Mengapakah penceraian secara khuluk juga dikenali sebagai penceraian tebus talak?", options: { A: "Kerana talak dijatuhkan oleh hakim", B: "Kerana suami bersumpah menjauhi isteri", C: "Kerana suami menyamakan isteri dengan ibunya", D: "Kerana isteri memberi wang atau harta kepada suami" }, ans: "D" },
+            { no: 12, q: "Antara berikut, penceraian manakah yang tergolong dalam kategori Talak Bain Kubra?\ni. Isteri yang ditalak tiga\nii. Isteri yang diceraikan melalui sumpah li'an\niii. Isteri yang ditalak satu dan belum tamat tempoh idah\niv. Isteri yang ditalak sebelum berlaku persetubuhan", options: { A: "i dan ii", B: "ii dan iii sahaja", C: "i, ii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "A" },
+            { no: 13, q: "Mengapakah Islam mensyariatkan hak rujuk bagi pasangan yang bercerai dengan talak raj'i dalam tempoh idah?", options: { A: "Untuk memanjangkan tempoh persengketaan", B: "Untuk membolehkan suami menyakiti hati isteri", C: "Untuk mewajibkan akad nikah serta mahar yang baharu", D: "Untuk memberi peluang membina hidup baharu dan berdamai" }, ans: "D" },
+            { no: 14, q: "Apakah yang dimaksudkan dengan Riba Qardhi berdasarkan contoh yang diberikan dalam modul?", options: { A: "Bayaran lebih kerana lewat bayar", B: "Pertukaran barang berbeza timbangan", C: "Bayaran lebih di luar majlis akad jual beli", D: "Meminjamkan wang dengan syarat ada keuntungan" }, ans: "D" },
+            { no: 15, q: "Mengapakah penundaan pembayaran hutang oleh orang yang kaya dan berkemampuan dianggap sebagai perbuatan zalim dalam Islam?", options: { A: "Kerana ia menghapuskan syarat akad ijab dan kabul", B: "Kerana pemberi hutang wajib menerima bayaran berganda", C: "Kerana dia sengaja menangguhkan hak orang lain walaupun mampu", D: "Kerana semua hutang piutang diwajibkan tanpa tempoh masa tertentu" }, ans: "C" },
+            { no: 16, q: "Manakah antara wanita berikut tergolong dalam kategori haram dinikahi buat sementara waktu sahaja?\ni. Wanita yang masih bersuami sehingga diceraikan dan tamat idah\nii. Mengumpulkan dua wanita bersaudara (adik-beradik) dalam satu masa\niii. Ibu dan saudara perempuan susuan\niv. Wanita musyrik sehingga dia memeluk Islam", options: { A: "i dan ii", B: "i dan iii sahaja", C: "i, iii dan iv sahaja", D: "i, ii dan juga iv sahaja" }, ans: "D" },
+            { no: 17, q: "Apakah perbezaan kesan hukum antara sumpah Li'an dengan Zihar terhadap hubungan suami isteri?", options: { A: "Kedua-duanya membolehkan rujuk tanpa akad baharu", B: "Li'an memutuskan nikah selamanya manakala Zihar mewajibkan kafarat", C: "Zihar memutuskan nasab anak manakala Li'an hanya mewajibkan puasa penuh", D: "Kedua-duanya tidak mempunyai sebarang implikasi kepada ikatan perkahwinan" }, ans: "B" },
+            { no: 18, q: "Sekiranya seorang ibu hilang kelayakan atau tidak memenuhi syarat sebagai penjaga anak (hadanah), susun turutan keutamaan waris yang layak mengambil alih tugas hadanah:\ni. Bapa\nii. Nenek sebelah ibu hingga ke atas\niii. Kakak atau adik perempuan seibu sebapa\niv. Nenek sebelah bapa hingga ke atas", options: { A: "ii, i, iv, iii", B: "i, ii, iii dan iv", C: "ii, iv, i dan iii sahaja", D: "i, iv, ii dan iii seterusnya" }, ans: "A" },
+            { no: 19, q: "Susun langkah-langkah yang disyariatkan bagi seorang suami untuk mengatasi perbuatan nusyuz isterinya mengikut tertib yang betul:\ni. Memukul dengan tujuan mengajar tanpa mencederakan\nii. Memberi nasihat dengan bijaksana dan menerangkan kesalahan\niii. Mengasingkan diri daripada isteri tidak melebihi tiga hari", options: { A: "ii, i, iii", B: "ii, iii dan i", C: "iii, ii dan i sahaja", D: "i, ii dan iii secara serentak" }, ans: "B" },
+            { no: 20, q: "Bagaimanakah syarat penjualan bagi barangan ribawi yang sama jenis (seperti beras dengan beras) untuk mengelakkan berlakunya riba?\ni. Hendaklah sama sukatan atau timbangan kedua-duanya\nii. Hendaklah dilakukan secara tunai\niii. Hendaklah berterimaan di dalam majlis akad\niv. Boleh ditangguhkan penyerahannya sehingga sebulan", options: { A: "i dan iv", B: "i, ii dan iii", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "B" },
+            { no: 21, q: "Ahmad mempunyai keinginan berkahwin yang sangat kuat sehingga dikhuatiri boleh terjatuh ke lembah maksiat, namun beliau mampu menanggung nafkah serta yakin tidak akan menganiaya isterinya. Apakah hukum perkahwinan bagi Ahmad?", options: { A: "Wajib", B: "Sunat sahaja", C: "Harus dilaksanakan", D: "Makruh buat masa ini" }, ans: "A" },
+            { no: 22, q: "Sepasang suami isteri telah sah bernikah dengan mahar RM1,000, namun suami menceraikan isterinya sebelum berlaku persetubuhan (dukhul). Berapakah kadar mahar yang wajib dibayar kepada bekas isteri tersebut?", options: { A: "RM1,000 penuh", B: "Tiada bayaran mahar", C: "RM500 iaitu separuh mahar", D: "RM250 sebagai ganti rugi sahaja" }, ans: "C" },
+            { no: 23, q: "Puan Aminah ditinggalkan oleh suaminya tanpa sebarang berita selama dua tahun dan suaminya juga gagal menyediakan nafkah selama tempoh tersebut. Apakah saluran pembubaran perkahwinan yang paling tepat boleh dipohon oleh Puan Aminah di mahkamah?", options: { A: "Zihar", B: "Khuluk", C: "Cerai Fasakh", D: "Ila' oleh suami" }, ans: "C" },
+            { no: 24, q: "Pada hari Jumaat, Encik Karim meneruskan urusan jual beli di kedai runcitnya selepas berkumandangnya azan kedua solat Jumaat. Apakah hukum urusan jual beli tersebut menurut modul?", options: { A: "Harus", B: "Makruh", C: "Sunat sahaja", D: "Haram dilakukan" }, ans: "D" },
+            { no: 25, q: "Seorang suami berkata kepada isterinya, 'Jika engkau keluar dari rumah ini tanpa kebenaranku pada hari ini, maka jatuhlah talak ke atasmu.' Pada petang hari yang sama, isterinya keluar tanpa izin. Apakah jenis penceraian yang berlaku dan implikasinya sekiranya ini merupakan kali pertama berlaku?", options: { A: "Talak Bain Kubra dan haram rujuk semula", B: "Talak Taklik yang berstatus Talak Raj'i sah", C: "Talak Bid'ie yang tidak memberi kesan hukumnya", D: "Cerai Khuluk yang mewajibkan bayaran tebus talak" }, ans: "B" },
+            { no: 26, q: "Puan Laila diceraikan oleh suaminya dengan Talak 1 melalui proses Fasakh di Mahkamah Syariah kerana penganiayaan. Semasa dalam tempoh idah, suaminya ingin merujuk kembali tanpa akad nikah baharu. Bagaimanakah status hak Puan Laila dan kebolehan rujuk tersebut?\ni. Perceraian Fasakh berstatus Talak Bain Sughra dan tidak boleh dirujuk tanpa akad baharu\nii. Suami masih boleh merujuk secara lisan dalam tempoh idah kerana ia Talak 1\niii. Puan Laila tidak berhak mendapat nafkah sepanjang idah kecuali tempat tinggal\niv. Puan Laila tidak mendapat hak pewarisan harta sekiranya suami meninggal dunia", options: { A: "i, iii dan iv", B: "i dan ii sahaja", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "A" },
+            { no: 27, q: "Selepas bercerai, Puan Zaiton diberikan hak penjagaan anak lelakinya yang berumur 5 tahun. Dua tahun kemudian, Puan Zaiton berkahwin lain dengan seorang lelaki yang tiada hubungan kekeluargaan dengan anak tersebut. Apakah kesan tindakan itu terhadap hak hadanah Puan Zaiton?", options: { A: "Hak hadanah kekal selagi anak belum baligh", B: "Hak hadanah gugur kecuali suami baharu ada pertalian keluarga", C: "Anak tersebut wajib diserahkan kepada bapa saudara sebelah bapa", D: "Hak hadanah hanya berakhir apabila anak mencapai umur lapan belas tahun" }, ans: "B" },
+            { no: 28, q: "Zul meminjam wang sebanyak RM1,000 daripada rakannya dengan perjanjian untuk memulangkan RM1,000 dalam tempoh sebulan. Namun akibat kesempitan wang, Zul terlewat membayar dan dikenakan bayaran tambahan menjadi RM1,200. Apakah jenis riba yang berlaku dalam transaksi tersebut?", options: { A: "Riba Al-Yad", B: "Riba Al-Fadhl", C: "Riba Al-Nasi'ah", D: "Sewa menyewa (Ijarah)" }, ans: "C" },
+            { no: 29, q: "Encik Halim menggadaikan seutas rantai emas bernilai RM5,000 bagi mendapatkan pinjaman RM3,000 daripada seorang pemegang gadaian. Apabila tempoh hutang tamat, Encik Halim gagal melunaskannya lalu pemegang gadaian menjual rantai itu pada harga RM5,000. Bagaimanakah pengagihan hasil jualan yang wajib dipatuhi mengikut hukum ar-Rahnu?", options: { A: "Pemegang gadaian memiliki keseluruhan RM5,000", B: "Pemegang gadaian mengambil RM3,000 dan memulangkan RM2,000", C: "Pemegang gadaian mengambil RM4,000 termasuk upah simpanan wajib", D: "Keseluruhan RM5,000 diserahkan kepada baitulmal tanpa sebarang baki" }, ans: "B" },
+            { no: 30, q: "Encik Razak berhasrat untuk berpoligami buat kali kedua tetapi mengetahui dirinya tidak mampu menyara nafkah zahir dan berlaku adil dalam giliran terhadap isteri pertamanya. Apakah tindakan serta kewajipan yang perlu dipatuhinya menurut syarak dan undang-undang keluarga Islam dalam modul?\ni. Membatalkan hasrat berpoligami dan mencukupkan dengan seorang isteri sahaja\nii. Mendapatkan kebenaran bertulis daripada Hakim Syariah jika layak dan berkeperluan\niii. Melaksanakan perkahwinan secara rahsia tanpa pengetahuan pihak berkuasa\niv. Menyedari bahawa ketidakadilan secara sengaja adalah kezaliman yang berdosa", options: { A: "i, ii dan iv", B: "i dan iii sahaja", C: "ii dan iii sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "A" }
+        ];
+
+        let studentDetails = {};
+        const studentAnswers = {};
+        let timerInterval = null;
+        let timeRemaining = 60 * 60;
+
+        let warningCount = 0;
+        const maxWarnings = 3;
+        let isQuizActive = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('hasTakenQuiz_GIE011_U2') === 'true') {
+                alert("Anda telah mengambil penilaian ini. Setiap pelajar hanya dibenarkan mengambil ujian ini SEKALI sahaja.");
+                document.body.innerHTML = `
+                    <div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+                        <div class="bg-white p-8 rounded-lg shadow-md text-center max-w-md border border-red-300">
+                            <h2 class="text-xl font-bold text-red-600 mb-2">AKSES DIHALANG</h2>
+                            <p class="text-sm text-gray-700">Anda telah menghantar ISLAMIC EDUCATION (GIE011) - UJIAN 2 ini sebelum ini. Penilaian hanya boleh diambil satu kali sahaja.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        function startQuiz(e) {
+            e.preventDefault();
+            studentDetails = {
+                nama: document.getElementById('inputNama').value,
+                ic: document.getElementById('inputIC').value,
+                ndp: document.getElementById('inputNDP').value,
+                kelas: document.getElementById('inputKelas').value,
+                sesi: document.getElementById('inputSesi').value,
+                tarikh: document.getElementById('inputTarikh').value,
+                pengajar: document.getElementById('inputPengajar').value
+            };
+
+            document.getElementById('studentFormSection').classList.add('hidden');
+            document.getElementById('quizQuestionsSection').classList.remove('hidden');
+            
+            renderQuestions();
+            startTimer();
+            initAntiCheat();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function initAntiCheat() {
+            isQuizActive = true;
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(() => {});
+            }
+
+            document.addEventListener('contextmenu', event => { if (isQuizActive) event.preventDefault(); });
+
+            ['copy', 'cut', 'paste'].forEach(evt => {
+                document.addEventListener(evt, event => {
+                    if (isQuizActive) {
+                        event.preventDefault();
+                        alert("⚠️ AMARAN: Fungsi salin dan tampal (Copy/Paste) adalah dilarang semasa ujian!");
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!isQuizActive) return;
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C' || e.key === 'p' || e.key === 'P'))) {
+                    e.preventDefault();
+                    alert("⚠️ AMARAN: Kekunci pintasan tidak dibenarkan semasa ujian!");
+                }
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (isQuizActive && document.hidden) triggerCheatWarning("Anda dikesan meninggalkan tab ujian atau membuka aplikasi lain!");
+            });
+
+            window.addEventListener('blur', () => {
+                if (isQuizActive) triggerCheatWarning("Tetingkap ujian hilang fokus! Jangan buka aplikasi atau tetingkap lain.");
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                if (isQuizActive && !document.fullscreenElement) triggerCheatWarning("Anda telah keluar daripada mod Skrin Penuh (Fullscreen)!");
+            });
+        }
+
+        function triggerCheatWarning(reason) {
+            if (!isQuizActive) return;
+            warningCount++;
+            document.getElementById('warningTracker').innerText = `Amaran: ${warningCount} / ${maxWarnings}`;
+
+            if (warningCount >= maxWarnings) {
+                isQuizActive = false;
+                alert(`🚨 UJIAN DITAMATKAN!\n\nSebab: ${reason}\nAnda telah melanggar peraturan keselamatan sebanyak ${maxWarnings} kali. Jawapan anda dihantar secara automatik.`);
+                autoSubmitAnswers();
+            } else {
+                alert(`⚠️ AMARAN PELANGGARAN (${warningCount}/${maxWarnings})!\n\n${reason}\n\nJika anda melakukannya sehingga ${maxWarnings} kali, ujian ini akan ditamatkan serta-merta.`);
+                if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                }
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timerDisplay').innerText = `Masa: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    isQuizActive = false;
+                    alert("Masa 60 minit telah tamat! Jawapan anda akan dihantar secara automatik.");
+                    autoSubmitAnswers();
+                }
+            }, 1000);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const qCard = document.createElement('div');
+                qCard.className = 'border border-gray-200 rounded-lg p-5 bg-gray-50 hover:bg-white transition shadow-sm';
+                
+                let optionsHTML = '';
+                for (const key in q.options) {
+                    optionsHTML += `
+                        <label class="flex items-start space-x-3 p-2.5 rounded hover:bg-blue-50 cursor-pointer border border-transparent hover:border-blue-200 transition">
+                            <input type="radio" name="question_${q.no}" value="${key}" onchange="recordAnswer(${q.no}, '${key}')" class="mt-0.5 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                            <span class="text-sm font-medium text-gray-800"><strong class="text-blue-900">${key}.</strong> ${q.options[key].replace(/\n/g, '<br>')}</span>
+                        </label>
+                    `;
+                }
+
+                qCard.innerHTML = `
+                    <p class="font-bold text-base text-blue-950 mb-3 whitespace-pre-line">${q.no}. ${q.q}</p>
+                    <div class="space-y-1.5">${optionsHTML}</div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function recordAnswer(qNo, selectedOption) {
+            studentAnswers[qNo] = selectedOption;
+            const count = Object.keys(studentAnswers).length;
+            document.getElementById('progressTracker').innerText = `${count} / 30 Dijawab`;
+        }
+
+        function submitAnswers(e) {
+            e.preventDefault();
+            if (Object.keys(studentAnswers).length < 30) {
+                if (!confirm("Anda belum menjawab semua soalan. Adakah anda pasti mahu menghantar?")) return;
+            }
+            processSubmission();
+        }
+
+        function autoSubmitAnswers() { processSubmission(); }
+
+        function processSubmission() {
+            isQuizActive = false;
+            if (timerInterval) clearInterval(timerInterval);
+            if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+
+            localStorage.setItem('hasTakenQuiz_GIE011_U2', 'true');
+
+            document.getElementById('quizQuestionsSection').classList.add('hidden');
+            document.getElementById('omrSection').classList.remove('hidden');
+
+            generateOMR();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateOMR() {
+            document.getElementById('omrNama').innerText = studentDetails.nama;
+            document.getElementById('omrIC').innerText = studentDetails.ic;
+            document.getElementById('omrNDP').innerText = studentDetails.ndp;
+            document.getElementById('omrKelas').innerText = studentDetails.kelas;
+            document.getElementById('omrSesi').innerText = studentDetails.sesi;
+            document.getElementById('omrTarikh').innerText = formatDate(studentDetails.tarikh);
+            document.getElementById('omrPengajar').innerText = studentDetails.pengajar;
+            document.getElementById('omrTarikhSemakan').innerText = formatDate(studentDetails.tarikh);
+
+            let totalCorrect = 0;
+            const col1 = document.getElementById('omrCol1');
+            const col2 = document.getElementById('omrCol2');
+            const col3 = document.getElementById('omrCol3');
+            col1.innerHTML = ''; col2.innerHTML = ''; col3.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const userAns = studentAnswers[q.no] || null;
+                const isCorrect = userAns === q.ans;
+                if (isCorrect) totalCorrect++;
+
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between py-1 border-b border-gray-200 last:border-b-0';
+
+                let bubblesHTML = '';
+                ['A', 'B', 'C', 'D'].forEach(opt => {
+                    let isFilled = (userAns === opt);
+                    let markHTML = isFilled ? (isCorrect ? `<span class="omr-mark correct">✓</span>` : `<span class="omr-mark wrong">✗</span>`) : '';
+                    bubblesHTML += `<div class="omr-bubble ${isFilled ? 'filled' : ''}">${opt}${markHTML}</div>`;
+                });
+
+                row.innerHTML = `<span class="font-bold w-6 text-gray-700">${q.no.toString().padStart(2, '0')}.</span><div class="flex space-x-2">${bubblesHTML}</div>`;
+                if (q.no <= 10) col1.appendChild(row);
+                else if (q.no <= 20) col2.appendChild(row);
+                else col3.appendChild(row);
+            });
+
+            const percentage = Math.round((totalCorrect / 30) * 100);
+            document.getElementById('omrMarkahPercent').innerText = `${percentage}%`;
+            document.getElementById('omrMarkahDetail').innerText = `(${totalCorrect} / 30 Soalan Betul)`;
+
+            const badge = document.getElementById('omrKeputusanBadge');
+            if (percentage >= 60) {
+                badge.innerText = "TERAMPIL";
+                badge.className = "text-2xl font-black mt-1 px-4 py-1 rounded bg-green-100 text-green-800 border border-green-400";
+            } else {
+                badge.innerText = "BELUM TERAMPIL";
+                badge.className = "text-2xl font-black mt-1 px-4 py-1 rounded bg-red-100 text-red-800 border border-red-400";
+            }
+        }
+
+        function formatDate(str) {
+            if (!str) return '';
+            const parts = str.split('-');
+            return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : str;
+        }
+    </script>
+</body>
+</html>

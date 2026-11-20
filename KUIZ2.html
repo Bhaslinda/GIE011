@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISLAMIC EDUCATION (GIE011) - KUIZ 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background-color: white !important; color: black !important; }
+            .page-break { page-break-before: always; }
+        }
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .omr-bubble {
+            width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #374151;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 10px; font-weight: bold; position: relative; background-color: #fff;
+        }
+        .omr-bubble.filled { background-color: #111827 !important; color: #ffffff !important; }
+        .omr-mark { position: absolute; font-size: 16px; font-weight: 900; line-height: 1; top: -3px; }
+        .omr-mark.correct { color: #22c55e; text-shadow: 0px 0px 2px #ffffff; }
+        .omr-mark.wrong { color: #ef4444; text-shadow: 0px 0px 2px #ffffff; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-800 font-sans leading-relaxed">
+
+    <header class="bg-blue-900 text-white shadow-md no-print sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">KOLEJ TEKNOLOGI TERMAJU</h1>
+                <p class="text-xs text-blue-200">JABATAN TENAGA MANUSIA, KAMPUS SANDAKAN</p>
+            </div>
+            <div class="mt-2 sm:mt-0 text-right">
+                <span class="inline-block bg-blue-800 text-blue-100 text-xs px-3 py-1 rounded-full font-semibold">
+                    MODUL: ISLAMIC EDUCATION (GIE011) — KUIZ 2
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 sm:p-6">
+
+        <section id="studentFormSection" class="bg-white rounded-lg shadow-md p-6 mb-6 no-print">
+            <h2 class="text-lg font-bold text-gray-800 border-b pb-2 mb-4">MAKLUMAT PELAJAR</h2>
+            
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-3 mb-5 text-xs text-amber-800">
+                <p class="font-bold mb-1">⚠️ PERATURAN PENILAIAN DALAM TALIAN:</p>
+                <ul class="list-disc list-inside space-y-0.5">
+                    <li>Ujian ini menggunakan sistem <strong>Mod Skrin Penuh (Fullscreen)</strong> secara automatik.</li>
+                    <li>Dilarang menukar tab, membuka aplikasi lain, menyalin teks, atau keluar dari skrin penuh.</li>
+                    <li>Amaran akan diberikan jika pelanggaran dikesan. <strong>3 kali amaran</strong> akan menyebabkan ujian ditamatkan serta-merta.</li>
+                </ul>
+            </div>
+
+            <form id="quizForm" onsubmit="startQuiz(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pelajar <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNama" required placeholder="Contoh: MUHAMMAD AMIR BIN ROSLI" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">No. Kad Pengenalan <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputIC" required placeholder="Contoh: 040512-12-5432" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">NDP (No. Daftar Pelajar) <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNDP" required placeholder="Contoh: 23224012" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Kelas <span class="text-red-500">*</span></label>
+                        <select id="inputKelas" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="" disabled selected>-- Sila Pilih Kelas --</option>
+                            <option value="STAS03 - SEM. 1">STAS03 - SEM. 1</option>
+                            <option value="SWKA03 - SEM. 1">SWKA03 - SEM. 1</option>
+                            <option value="SWFL03 - SEM. 1">SWFL03 - SEM. 1</option>
+                            <option value="SMET03 - SEM. 1">SMET03 - SEM. 1</option>
+                            <option value="SIKR03 - SEM. 1">SIKR03 - SEM. 1</option>
+                            <option value="SETL03 - SEM. 1">SETL03 - SEM. 1</option>
+                            <option value="SMPU03 - SEM. 1">SMPU03 - SEM. 1</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Sesi Latihan <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputSesi" required placeholder="Contoh: SESI 2 / 2026" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tarikh Ujian <span class="text-red-500">*</span></label>
+                        <input type="date" id="inputTarikh" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pegawai Penilai <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputPengajar" value="NUR SYAFIQAH BINTI ARMAN" readonly class="w-full border border-gray-300 bg-gray-100 text-gray-700 font-semibold rounded px-3 py-2 text-sm focus:outline-none cursor-not-allowed">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 rounded transition shadow-md">
+                        MULA JAWAB UJIAN
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="quizQuestionsSection" class="hidden bg-white rounded-lg shadow-md p-6 mb-6 no-print no-select">
+            <div class="flex flex-wrap justify-between items-center border-b pb-3 mb-6 gap-2">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">ISLAMIC EDUCATION (GIE011) - KUIZ 2 (20 SOALAN)</h2>
+                    <p class="text-xs text-gray-500">Pilih SATU jawapan yang tepat bagi setiap soalan.</p>
+                </div>
+                <div class="text-right">
+                    <div id="timerDisplay" class="text-lg font-bold text-red-600 mb-0.5">Masa: 30:00</div>
+                    <div class="flex items-center justify-end space-x-3 text-xs font-bold">
+                        <span id="warningTracker" class="text-amber-600">Amaran: 0 / 3</span>
+                        <span id="progressTracker" class="text-blue-700">0 / 20 Dijawab</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="answersForm" onsubmit="submitAnswers(event)">
+                <div id="questionsContainer" class="space-y-8"></div>
+
+                <div class="mt-8 border-t pt-6 flex justify-end">
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded shadow-md transition">
+                        HANTAR JAWAPAN & JANA BORANG OMR
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="omrSection" class="hidden bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-gray-300">
+            <div class="no-print mb-6 flex justify-between items-center bg-gray-50 p-3 rounded border border-gray-200">
+                <span class="text-xs text-gray-600 font-medium">Borang OMR Rasmi Pelajar - ISLAMIC EDUCATION (GIE011) - KUIZ 2</span>
+                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2 rounded shadow">
+                    🖨️ CETAK BORANG OMR / SIMPAN PDF
+                </button>
+            </div>
+
+            <div class="border-b-2 border-gray-800 pb-4 mb-4 relative">
+                <div class="flex justify-end mb-1">
+                    <span class="border border-gray-400 text-[10px] px-2 py-0.5 inline-block font-mono">OMR-GIE011-K2</span>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Coat_of_arms_of_Malaysia.svg/500px-Coat_of_arms_of_Malaysia.svg.png" alt="Jata Negara Malaysia" class="w-20 h-auto object-contain mb-2">
+                    <h2 class="text-base font-bold tracking-wider uppercase">JABATAN TENAGA MANUSIA</h2>
+                    <h1 class="text-xl font-extrabold uppercase text-blue-900">KOLEJ TEKNOLOGI TERMAJU</h1>
+                    <h3 class="text-sm font-semibold uppercase tracking-wide">KAMPUS SANDAKAN</h3>
+                    <p class="text-xs font-medium text-gray-600 mt-1">BORANG JAWAPAN OMR & PENILAIAN ISLAMIC EDUCATION (GIE011) — KUIZ 2</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2 text-xs border border-gray-400 p-3 mb-6 bg-gray-50">
+                <div><span class="font-bold">NAMA PELAJAR:</span> <span id="omrNama" class="uppercase font-mono font-semibold"></span></div>
+                <div><span class="font-bold">NO. KAD PENGENALAN:</span> <span id="omrIC" class="font-mono"></span></div>
+                <div><span class="font-bold">NO. DAFTAR PELAJAR (NDP):</span> <span id="omrNDP" class="font-mono"></span></div>
+                <div><span class="font-bold">KELAS:</span> <span id="omrKelas" class="uppercase font-mono"></span></div>
+                <div><span class="font-bold">SESI LATIHAN:</span> <span id="omrSesi" class="uppercase font-mono"></span></div>
+                <div><span class="font-bold">TARIKH UJIAN:</span> <span id="omrTarikh"></span></div>
+            </div>
+
+            <div class="mb-6">
+                <h4 class="text-xs font-bold uppercase mb-2 text-center tracking-wider border-b pb-1">PETAK JAWAPAN OMR (20 SOALAN)</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-xs">
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol1"></div>
+                    <div class="border border-gray-300 p-2 space-y-1.5" id="omrCol2"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 border-2 border-gray-800 p-4 mb-6">
+                <div class="flex flex-col justify-center items-center border-r border-gray-400 pr-4">
+                    <span class="text-xs font-bold uppercase text-gray-600">JUMLAH MARKAH KESELURUHAN</span>
+                    <div class="text-3xl font-extrabold my-1" id="omrMarkahPercent">0%</div>
+                    <span class="text-xs font-medium text-gray-500" id="omrMarkahDetail">(0 / 20 Soalan Betul)</span>
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <span class="text-xs font-bold uppercase text-gray-600">KEPUTUSAN PENILAIAN</span>
+                    <div class="text-2xl font-black mt-1 px-4 py-1 rounded" id="omrKeputusanBadge"></div>
+                </div>
+            </div>
+
+            <div class="border border-gray-400 p-4 text-xs bg-gray-50">
+                <h4 class="font-bold uppercase text-gray-800 mb-2 border-b border-gray-300 pb-1">PERAKUAN SEMAKAN OLEH PEGAWAI PENILAI (PP)</h4>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <p><span class="font-bold">NAMA PEGAWAI PENILAI (PP):</span> <span id="omrPengajar" class="uppercase font-semibold"></span></p>
+                        <p class="mt-4"><span class="font-bold">TANDATANGAN:</span> ___________________________</p>
+                    </div>
+                    <div class="text-right flex flex-col justify-end">
+                        <p><span class="font-bold">TARIKH SEMAKAN:</span> <span id="omrTarikhSemakan"></span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const questionsData = [
+            { no: 1, q: "Apakah maksud perkataan 'abada dari segi bahasa yang menjadi kata dasar kepada istilah ibadah?", options: { A: "Patuh, taat dan tunduk", B: "Menahan diri daripada lapar", C: "Membersihkan diri daripada kotoran", D: "Menghimpunkan dua solat dalam satu waktu" }, ans: "A" },
+            { no: 2, q: "Antara berikut, yang manakah tergolong dalam tujuh jenis air mutlak yang boleh digunakan untuk bersuci?\ni. Air sungai\nii. Air embun\niii. Air salji\niv. Air mawar", options: { A: "i dan ii", B: "ii dan iv", C: "i, ii dan iii", D: "i, ii, iii serta iv" }, ans: "C" },
+            { no: 3, q: "Susun rukun wuduk berikut mengikut tertib yang betul bermula daripada awal hingga akhir:\ni. Membasuh dua kaki hingga buku lali\nii. Berniat ketika meratakan air ke muka\niii. Menyapu sedikit air di bahagian kepala\niv. Membasuh dua tangan hingga dua siku", options: { A: "ii, iii, iv, i", B: "ii, iv, iii dan i", C: "iv, ii, iii dan i sahaja", D: "ii, iv, i dan juga iii sahaja" }, ans: "B" },
+            { no: 4, q: "Berapakah tempoh maksimum bagi keluarnya darah haid dan darah nifas menurut huraian modul?", options: { A: "7 hari dan 30 hari", B: "10 hari dan 40 hari penuh", C: "15 hari 15 malam dan 40 hari 40 malam", D: "15 hari 15 malam dan juga 60 hari 60 malam" }, ans: "D" },
+            { no: 5, q: "Bilakah bermulanya waktu solat fardu Maghrib menurut jadual waktu solat dalam modul?", options: { A: "Apabila matahari terbenam", B: "Apabila bayang sama panjang", C: "Apabila terbitnya fajar sadik di ufuk timur", D: "Apabila hilang cahaya merah di kaki langit sebelah barat" }, ans: "A" },
+            { no: 6, q: "Mengapakah amalan seperti bekerja di pejabat dan menuntut ilmu dikategorikan sebagai Ibadah Umum (Ibadah 'Ammah)?", options: { A: "Ia hanya wajib dilakukan di dalam masjid", B: "Ia tidak memerlukan niat yang ikhlas kerana Allah SWT", C: "Ia pengabdian tidak langsung melalui urusan duniawi berlandaskan syariat", D: "Ia mempunyai struktur dan peraturan terperinci yang tidak boleh diubah sama sekali" }, ans: "C" },
+            { no: 7, q: "Mengapakah air kencing seorang bayi lelaki berumur 1 tahun yang hanya minum susu ibunya diklasifikasikan sebagai najis mukhaffafah?", options: { A: "Kerana ia tidak berbau busuk langsung", B: "Kerana belum makan makanan selain susu ibu", C: "Kerana najisnya hanya boleh disucikan dengan tujuh kali basuhan", D: "Kerana ia termasuk dalam kategori najis pertengahan yang sukar dibersihkan" }, ans: "B" },
+            { no: 8, q: "Apakah perbezaan utama antara darah istihadhah dengan darah haid menurut modul?", options: { A: "Darah istihadhah berlaku selepas melahirkan anak", B: "Darah istihadhah hanya keluar selama 15 hari sahaja", C: "Darah istihadhah mewajibkan wanita meninggalkan solat fardu", D: "Darah istihadhah ialah darah berpenyakit yang keluar bukan pada masanya" }, ans: "D" },
+            { no: 9, q: "Mengapakah membaca doa qunut dan duduk tasyahud awal dikategorikan sebagai Sunat Ab'ad dalam solat?", options: { A: "Kerana solat terbatal jika tertinggal", B: "Kerana sunat diganti dengan sujud sahwi jika tertinggal", C: "Kerana ia merupakan rukun qauli yang wajib dilafazkan lidah", D: "Kerana ia tidak memerlukan sebarang sujud sahwi sekiranya terlupa melakukannya" }, ans: "B" },
+            { no: 10, q: "Antara pernyataan berikut, yang manakah menerangkan syarat sah bagi mendirikan Solat Jumaat?\ni. Ditunaikan di tempat yang dikhaskan seperti masjid\nii. Ditunaikan secara berjemaah sekurang-kurangnya 40 orang bermastautin\niii. Didahului dengan bacaan dua khutbah sebelum solat\niv. Wajib dilaksanakan oleh golongan musafir yang sedang dalam perjalanan", options: { A: "i, ii dan iii", B: "i, ii dan iv sahaja", C: "ii, iii dan iv sahaja", D: "i, ii, iii serta iv semuanya" }, ans: "A" },
+            { no: 11, q: "Bagaimanakah sesuatu pekerjaan harian seseorang Muslim boleh ditolak daripada mendapat ganjaran ibadah walaupun niatnya ikhlas kerana Allah SWT?\ni. Pekerjaan tersebut bercanggah dengan hukum syarak seperti bekerja di kelab malam\nii. Pekerjaan tersebut dilakukan oleh orang yang tidak beragama Islam\niii. Pekerjaan tersebut melalaikannya daripada menunaikan solat dan ibadah fardu\niv. Pekerjaan tersebut dilakukan di luar waktu solat fardu lima waktu", options: { A: "i dan iv", B: "ii dan iii sahaja", C: "i, ii dan iv sahaja", D: "i, ii dan juga iii sahaja" }, ans: "D" },
+            { no: 12, q: "Mengapakah tidur dalam keadaan duduk dengan tetap punggungnya tidak membatalkan wuduk berbanding tidur secara berbaring?", options: { A: "Kerana tidur duduk tidak memejamkan mata", B: "Kerana tidur berbaring hanya berlaku pada waktu malam", C: "Kerana kedudukan punggung yang tetap menghalang keluarnya angin", D: "Kerana orang yang tidur berbaring sentiasa bermimpi dan keluar air mani" }, ans: "C" },
+            { no: 13, q: "Manakah antara berikut merupakan padanan yang tepat bagi pembahagian Rukun Solat?\ni. Rukun Qauli: Membaca surah al-Fatihah dan salam pertama\nii. Rukun Fi'li: Berdiri tegak, rukuk dan sujud\niii. Rukun Qalbi: Niat di dalam hati\niv. Rukun Fi'li: Melafazkan takbiratulihram", options: { A: "i dan ii", B: "i, ii dan iii", C: "i, iii dan iv sahaja", D: "ii, iii dan juga iv sahaja" }, ans: "B" },
+            { no: 14, q: "Kasut kerja milik Zaki terkena jilatan anjing di kawasan bengkel. Susun prosedur menyucikan najis tersebut mengikut urutan yang betul:\ni. Membuang atau membersihkan kesan najis terlebih dahulu\nii. Membasuh sebanyak enam kali menggunakan air mutlak\niii. Membasuh sekali menggunakan air yang bercampur tanah bersih\niv. Memastikan warna, bau dan rasa najis telah hilang sepenuhnya", options: { A: "i, ii, iii, iv", B: "iii, i, ii dan iv", C: "i, iii, ii dan juga iv", D: "i, iii, iv dan seterusnya ii" }, ans: "C" },
+            { no: 15, q: "Encik Roslan mengalami luka melecur yang serius di muka dan tangannya akibat kemalangan di makmal, dan doktor mengesahkan terkena air boleh melambatkan penyembuhan. Apakah tindakan bersuci yang tepat bagi beliau sebelum menunaikan solat?", options: { A: "Bertayammum dengan debu tanah suci", B: "Menunaikan solat tanpa bersuci langsung", C: "Menggunakan air mutlak secara berlebihan pada luka", D: "Menunggu sehingga luka sembuh sepenuhnya walaupun berbulan-bulan" }, ans: "A" },
+            { no: 16, q: "Farhan menyertai solat jenazah di surau institutnya. Susun urutan kaifiat solat jenazah yang perlu dilakukannya selepas berniat pada takbir pertama:\ni. Membaca surah al-Fatihah selepas takbir pertama\nii. Membaca selawat ke atas Nabi SAW selepas takbir kedua\niii. Mendoakan jenazah selepas takbir ketiga\niv. Membaca doa selepas takbir keempat dan memberi salam", options: { A: "i, iii, ii, iv", B: "ii, i, iii dan iv", C: "i, ii, iv dan iii sahaja", D: "i, ii, iii dan juga iv sahaja" }, ans: "D" },
+            { no: 17, q: "Pada bulan Ramadan, pasangan suami isteri tertidur selepas berjimak pada waktu malam dan hanya tersedar pada pukul 6.15 pagi setelah masuk waktu Subuh. Apakah hukum puasa mereka pada hari tersebut serta tindakan yang wajib dilakukan?", options: { A: "Puasa batal serta-merta dan wajib qada", B: "Puasa sah dan wajib mandi sebelum solat Subuh", C: "Puasa makruh dan perlu mengambil wuduk sahaja untuk Subuh", D: "Puasa tidak sah melainkan mereka mandi wajib sebelum terbit fajar" }, ans: "B" },
+            { no: 18, q: "Puan Salma mengalami keguguran kandungan berupa segumpal daging dan tiada darah nifas yang keluar selepas kejadian tersebut. Berdasarkan pandangan mazhab Syafi'ie dalam modul, apakah kewajipan yang perlu dilaksanakan oleh Puan Salma?", options: { A: "Tidak perlu mandi kerana belum cukup sifat", B: "Menunggu selama 40 hari sebelum menunaikan solat", C: "Wajib mandi wajib serta-merta kerana darah wiladah", D: "Cukup sekadar mengambil wuduk dan membersihkan pakaian sahaja" }, ans: "C" },
+            { no: 19, q: "Amir bermusafir dari Johor Bahru ke Kuala Lumpur sejauh 330 km untuk menghadiri kursus latihan. Setibanya di kawasan rehat pada waktu Asar, dia ingin menunaikan solat Zuhur dan Asar secara Jamak Ta'khir dan Qasar. Manakah syarat yang wajib dipatuhi oleh Amir?\ni. Berniat qasar di dalam takbiratulihram\nii. Tidak berimamkan orang yang bersolat sempurna (tamam)\niii. Perjalanan bukan bertujuan maksiat dan melebihi dua marhalah (89 km)\niv. Solat Zuhur dan Asar dilaksanakan dua rakaat setiap satu secara berturut-turut", options: { A: "i, ii, iii dan iv", B: "i, ii dan iii sahaja", C: "ii, iii dan iv sahaja", D: "i dan iv sahaja tanpa syarat lain" }, ans: "A" },
+            { no: 20, q: "Semasa sedang menunaikan solat Zuhur secara bersendirian, seorang pelajar tiba-tiba teringat sesuatu yang melucukan lalu ketawa sehingga mengeluarkan suara, manakala seorang rakannya di sebelah hanya tersenyum tanpa suara dan mengubah niat kepada solat sunat. Apakah status solat kedua-dua pelajar tersebut?", options: { A: "Kedua-dua solat kekal sah sepenuhnya", B: "Hanya solat pelajar pertama yang terbatal", C: "Hanya solat pelajar kedua yang terbatal serta-merta", D: "Kedua-dua solat terbatal kerana ketawa bersuara dan mengubah niat" }, ans: "D" }
+        ];
+
+        let studentDetails = {};
+        const studentAnswers = {};
+        let timerInterval = null;
+        let timeRemaining = 30 * 60;
+
+        let warningCount = 0;
+        const maxWarnings = 3;
+        let isQuizActive = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('hasTakenQuiz_GIE011_K2') === 'true') {
+                alert("Anda telah mengambil penilaian ini. Setiap pelajar hanya dibenarkan mengambil ujian ini SEKALI sahaja.");
+                document.body.innerHTML = `
+                    <div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+                        <div class="bg-white p-8 rounded-lg shadow-md text-center max-w-md border border-red-300">
+                            <h2 class="text-xl font-bold text-red-600 mb-2">AKSES DIHALANG</h2>
+                            <p class="text-sm text-gray-700">Anda telah menghantar ISLAMIC EDUCATION (GIE011) - KUIZ 2 ini sebelum ini. Penilaian hanya boleh diambil satu kali sahaja.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        function startQuiz(e) {
+            e.preventDefault();
+            studentDetails = {
+                nama: document.getElementById('inputNama').value,
+                ic: document.getElementById('inputIC').value,
+                ndp: document.getElementById('inputNDP').value,
+                kelas: document.getElementById('inputKelas').value,
+                sesi: document.getElementById('inputSesi').value,
+                tarikh: document.getElementById('inputTarikh').value,
+                pengajar: document.getElementById('inputPengajar').value
+            };
+
+            document.getElementById('studentFormSection').classList.add('hidden');
+            document.getElementById('quizQuestionsSection').classList.remove('hidden');
+            
+            renderQuestions();
+            startTimer();
+            initAntiCheat();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function initAntiCheat() {
+            isQuizActive = true;
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(() => {});
+            }
+
+            document.addEventListener('contextmenu', event => { if (isQuizActive) event.preventDefault(); });
+
+            ['copy', 'cut', 'paste'].forEach(evt => {
+                document.addEventListener(evt, event => {
+                    if (isQuizActive) {
+                        event.preventDefault();
+                        alert("⚠️ AMARAN: Fungsi salin dan tampal (Copy/Paste) adalah dilarang semasa ujian!");
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!isQuizActive) return;
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C' || e.key === 'p' || e.key === 'P'))) {
+                    e.preventDefault();
+                    alert("⚠️ AMARAN: Kekunci pintasan tidak dibenarkan semasa ujian!");
+                }
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (isQuizActive && document.hidden) triggerCheatWarning("Anda dikesan meninggalkan tab ujian atau membuka aplikasi lain!");
+            });
+
+            window.addEventListener('blur', () => {
+                if (isQuizActive) triggerCheatWarning("Tetingkap ujian hilang fokus! Jangan buka aplikasi atau tetingkap lain.");
+            });
+
+            document.addEventListener('fullscreenchange', () => {
+                if (isQuizActive && !document.fullscreenElement) triggerCheatWarning("Anda telah keluar daripada mod Skrin Penuh (Fullscreen)!");
+            });
+        }
+
+        function triggerCheatWarning(reason) {
+            if (!isQuizActive) return;
+            warningCount++;
+            document.getElementById('warningTracker').innerText = `Amaran: ${warningCount} / ${maxWarnings}`;
+
+            if (warningCount >= maxWarnings) {
+                isQuizActive = false;
+                alert(`🚨 UJIAN DITAMATKAN!\n\nSebab: ${reason}\nAnda telah melanggar peraturan keselamatan sebanyak ${maxWarnings} kali. Jawapan anda dihantar secara automatik.`);
+                autoSubmitAnswers();
+            } else {
+                alert(`⚠️ AMARAN PELANGGARAN (${warningCount}/${maxWarnings})!\n\n${reason}\n\nJika anda melakukannya sehingga ${maxWarnings} kali, ujian ini akan ditamatkan serta-merta.`);
+                if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                }
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timerDisplay').innerText = `Masa: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    isQuizActive = false;
+                    alert("Masa 30 minit telah tamat! Jawapan anda akan dihantar secara automatik.");
+                    autoSubmitAnswers();
+                }
+            }, 1000);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const qCard = document.createElement('div');
+                qCard.className = 'border border-gray-200 rounded-lg p-5 bg-gray-50 hover:bg-white transition shadow-sm';
+                
+                let optionsHTML = '';
+                for (const key in q.options) {
+                    optionsHTML += `
+                        <label class="flex items-start space-x-3 p-2.5 rounded hover:bg-blue-50 cursor-pointer border border-transparent hover:border-blue-200 transition">
+                            <input type="radio" name="question_${q.no}" value="${key}" onchange="recordAnswer(${q.no}, '${key}')" class="mt-0.5 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                            <span class="text-sm font-medium text-gray-800"><strong class="text-blue-900">${key}.</strong> ${q.options[key].replace(/\n/g, '<br>')}</span>
+                        </label>
+                    `;
+                }
+
+                qCard.innerHTML = `
+                    <p class="font-bold text-base text-blue-950 mb-3 whitespace-pre-line">${q.no}. ${q.q}</p>
+                    <div class="space-y-1.5">${optionsHTML}</div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function recordAnswer(qNo, selectedOption) {
+            studentAnswers[qNo] = selectedOption;
+            const count = Object.keys(studentAnswers).length;
+            document.getElementById('progressTracker').innerText = `${count} / 20 Dijawab`;
+        }
+
+        function submitAnswers(e) {
+            e.preventDefault();
+            if (Object.keys(studentAnswers).length < 20) {
+                if (!confirm("Anda belum menjawab semua soalan. Adakah anda pasti mahu menghantar?")) return;
+            }
+            processSubmission();
+        }
+
+        function autoSubmitAnswers() { processSubmission(); }
+
+        function processSubmission() {
+            isQuizActive = false;
+            if (timerInterval) clearInterval(timerInterval);
+            if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+
+            localStorage.setItem('hasTakenQuiz_GIE011_K2', 'true');
+
+            document.getElementById('quizQuestionsSection').classList.add('hidden');
+            document.getElementById('omrSection').classList.remove('hidden');
+
+            generateOMR();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function generateOMR() {
+            document.getElementById('omrNama').innerText = studentDetails.nama;
+            document.getElementById('omrIC').innerText = studentDetails.ic;
+            document.getElementById('omrNDP').innerText = studentDetails.ndp;
+            document.getElementById('omrKelas').innerText = studentDetails.kelas;
+            document.getElementById('omrSesi').innerText = studentDetails.sesi;
+            document.getElementById('omrTarikh').innerText = formatDate(studentDetails.tarikh);
+            document.getElementById('omrPengajar').innerText = studentDetails.pengajar;
+            document.getElementById('omrTarikhSemakan').innerText = formatDate(studentDetails.tarikh);
+
+            let totalCorrect = 0;
+            const col1 = document.getElementById('omrCol1');
+            const col2 = document.getElementById('omrCol2');
+            col1.innerHTML = ''; col2.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const userAns = studentAnswers[q.no] || null;
+                const isCorrect = userAns === q.ans;
+                if (isCorrect) totalCorrect++;
+
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between py-1 border-b border-gray-200 last:border-b-0';
+
+                let bubblesHTML = '';
+                ['A', 'B', 'C', 'D'].forEach(opt => {
+                    let isFilled = (userAns === opt);
+                    let markHTML = isFilled ? (isCorrect ? `<span class="omr-mark correct">✓</span>` : `<span class="omr-mark wrong">✗</span>`) : '';
+                    bubblesHTML += `<div class="omr-bubble ${isFilled ? 'filled' : ''}">${opt}${markHTML}</div>`;
+                });
+
+                row.innerHTML = `<span class="font-bold w-6 text-gray-700">${q.no.toString().padStart(2, '0')}.</span><div class="flex space-x-2">${bubblesHTML}</div>`;
+                if (q.no <= 10) col1.appendChild(row); else col2.appendChild(row);
+            });
+
+            const percentage = Math.round((totalCorrect / 20) * 100);
+            document.getElementById('omrMarkahPercent').innerText = `${percentage}%`;
+            document.getElementById('omrMarkahDetail').innerText = `(${totalCorrect} / 20 Soalan Betul)`;
+
+            const badge = document.getElementById('omrKeputusanBadge');
+            if (percentage >= 60) {
+                badge.innerText = "TERAMPIL";
+                badge.className = "text-2xl font-black mt-1 px-4 py-1 rounded bg-green-100 text-green-800 border border-green-400";
+            } else {
+                badge.innerText = "BELUM TERAMPIL";
+                badge.className = "text-2xl font-black mt-1 px-4 py-1 rounded bg-red-100 text-red-800 border border-red-400";
+            }
+        }
+
+        function formatDate(str) {
+            if (!str) return '';
+            const parts = str.split('-');
+            return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : str;
+        }
+    </script>
+</body>
+</html>
